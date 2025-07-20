@@ -58,10 +58,6 @@ pnpm run dev
 
 ---
 
-## 🚧 Development Guide
-Under Development
----
-
 ## 🖤 License
 
 This project is licensed under the **ISC License**.
