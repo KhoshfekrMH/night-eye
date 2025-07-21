@@ -1,2 +1,20 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+:root {
+  /*Tokyo Night Color Pallet*/
+  --color-bg: #1a1b26;
+  --color-surface: #24283b;
+  --color-accent: #7aa2f7;
+  --color-accent-2: #bb9af7;
+  --color-text: #c0caf5;
+  --color-muted: #a9b1d6;
+  --color-danger: #f7768e;
+  --color-success: #9ece6a;
+  font-family: "Space Mono", monospace;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+}
