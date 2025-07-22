@@ -1,0 +1,11 @@
+.logo {
+  color: var(--color-accent-2);
+}
+
+.logo:hover {
+  color: var(--color-accent-1);
+}
+
+li:hover {
+  color: var(--color-accent-2);
+}
