@@ -1,4 +1,3 @@
-import routes from "../../../routes";
 import Dropdown from "./Dropdown";
 
 import "./MainNav.css";
