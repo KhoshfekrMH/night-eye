@@ -14,7 +14,18 @@
   font-family: "Space Mono", monospace;
 }
 
-body {
+html {
   background-color: var(--color-bg);
   color: var(--color-accent);
+}
+
+.title-text {
+  color: var(--color-accent-2);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.copyright {
+  background-color: var(--color-accent-2);
+  color: var(--color-bg);
 }
