@@ -1,11 +1,15 @@
-import Header from "../shared/Layouts/Header";
-import Footer from "../shared/Layouts/Footer";
+import MainLayout from "../Layouts/MainLayout";
+import PanelLayout from "../Layouts/PanelLayout";
 
 export default function TestPage() {
   return (
     <div>
-      <Header type="panel" />
-      <Footer />
+      <PanelLayout>
+        <h1>Panel Layout</h1>
+      </PanelLayout>
+      <MainLayout>
+        <h1>Main Layout</h1>
+      </MainLayout>
     </div>
   );
 }
