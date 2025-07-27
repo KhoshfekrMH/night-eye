@@ -1,15 +1,10 @@
 import MainLayout from "../Layouts/MainLayout";
-import PanelLayout from "../Layouts/PanelLayout";
+import Hero from "../shared/components/UIElements/Hero/Hero";
 
 export default function TestPage() {
   return (
-    <div>
-      <PanelLayout>
-        <h1>Panel Layout</h1>
-      </PanelLayout>
-      <MainLayout>
-        <h1>Main Layout</h1>
-      </MainLayout>
-    </div>
+    <MainLayout>
+      <Hero />
+    </MainLayout>
   );
 }
