@@ -1,3 +1,5 @@
+import { NavLink, Link } from "react-router-dom";
+
 function Dropdown({ links = [] }) {
   const archiveSubMenuRoutes = [
     { path: "/archive/space", label: "Space" },
@@ -31,15 +33,36 @@ function Dropdown({ links = [] }) {
         >
           {links.map((link) => (
             <li key={link.path}>
-              <a href={link.path}>{link.label}</a>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                {link.label}
+              </NavLink>
             </li>
           ))}
           <li>
-            <a href="/archive">Archive</a>
+            <NavLink
+              to="/archive"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Archive
+            </NavLink>
             <ul className="p-2">
               {archiveSubMenuRoutes.map((item) => (
                 <li key={item.path}>
-                  <a href={item.path}>{item.label}</a>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      isActive ? "nav-link active" : "nav-link"
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
                 </li>
               ))}
             </ul>

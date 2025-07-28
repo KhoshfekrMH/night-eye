@@ -6,6 +6,17 @@
   color: var(--color-accent-1);
 }
 
-li:hover {
+.nav-link {
+  color: var(--color-text);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+.nav-link.active {
+  font-weight: bold;
   color: var(--color-accent-2);
+  border-bottom: 2px solid var(--color-accent-2); /* Optional underline */
 }
