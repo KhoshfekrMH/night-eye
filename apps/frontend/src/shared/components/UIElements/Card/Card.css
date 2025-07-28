@@ -1,0 +1,16 @@
+.card {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  user-select: none;
+  user-select: none;
+  transition: color 0.3 ease;
+}
+
+.card-title {
+  color: var(--color-accent-2);
+  transition: color 0.3 ease;
+}
+
+.card:hover .card-title {
+  text-decoration: underline;
+}

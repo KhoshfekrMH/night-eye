@@ -16,11 +16,11 @@
 
 html {
   background-color: var(--color-bg);
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .title-text {
-  color: var(--color-text);
+  color: var(--color-accent-2);
   font-weight: bold;
 }
 
@@ -30,11 +30,23 @@ html {
 }
 
 .btn-primary {
-  background-color: var(--color-accent-2);
+  background-color: var(--color-accent);
   color: var(--color-bg);
 }
 
 .btn-primary:hover {
+  background-color: var(--color-accent-2);
+  color: var(--color-bg);
+}
+
+.badge-secondary {
+  background-color: var(--color-danger);
+  color: var(--color-bg);
+  border: none;
+}
+
+.badge-outline {
   background-color: var(--color-accent);
   color: var(--color-bg);
+  border: none;
 }
