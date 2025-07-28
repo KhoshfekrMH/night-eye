@@ -10,7 +10,7 @@ function BaseNav({ links = [], children }) {
   ];
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-200 shadow-sm">
       <Dropdown links={links} />
       <img src="./Night Eye Logo.png" className="w-16" alt="Night Eye Logo" />
 

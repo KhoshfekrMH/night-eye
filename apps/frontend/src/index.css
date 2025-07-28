@@ -1,8 +1,46 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/*Based on Tokyo Night color scheme*/
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: "true";
+  /* Base background surfaces */
+  --color-base-100: #1a1b26; /* dark bg */
+  --color-base-200: #24283b; /* darker surface */
+  --color-base-300: #2e3440; /* even darker */
+
+  --color-base-content: #c0caf5; /* main text color */
+
+  /* Brand colors */
+  --color-primary: #7aa2f7; /* main blue */
+  --color-primary-content: #1a1b26; /* text on primary */
+
+  --color-secondary: #bb9af7; /* purple */
+  --color-secondary-content: #1a1b26;
+
+  --color-accent: #7dcfff; /* light blue accent */
+  --color-accent-content: #1a1b26;
+
+  /* Neutrals */
+  --color-neutral: #444b6a;
+  --color-neutral-content: #c0caf5;
+
+  /* Status colors */
+  --color-info: #7aa2f7; /* info blue */
+  --color-info-content: #1a1b26;
+
+  --color-success: #9ece6a; /* green success */
+  --color-success-content: #1a1b26;
+
+  --color-warning: #e0af68; /* amber warning */
+  --color-warning-content: #1a1b26;
+
+  --color-error: #f7768e; /* pink/red error */
+  --color-error-content: #1a1b26;
+}
+
 :root {
-  /*Tokyo Night Color Pallet*/
   --color-bg: #1a1b26;
   --color-surface: #24283b;
   --color-accent: #7aa2f7;
@@ -11,42 +49,11 @@
   --color-muted: #a9b1d6;
   --color-danger: #f7768e;
   --color-success: #9ece6a;
-  font-family: "Space Mono", monospace;
+
+  --font-primary: "Space Mono", monospace;
 }
 
 html {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
-
-.title-text {
-  color: var(--color-accent-2);
-  font-weight: bold;
-}
-
-.copyright {
-  background-color: var(--color-accent-2);
-  color: var(--color-bg);
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-}
-
-.btn-primary:hover {
-  background-color: var(--color-accent-2);
-  color: var(--color-bg);
-}
-
-.badge-secondary {
-  background-color: var(--color-danger);
-  color: var(--color-bg);
-  border: none;
-}
-
-.badge-outline {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  border: none;
+  scroll-behavior: smooth;
+  font-family: "Space Mono", monospace;
 }

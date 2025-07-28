@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { mainNavLinks } from "../../routes";
 
 function Footer() {
@@ -15,16 +16,16 @@ function Footer() {
         </aside>
 
         <nav aria-label="Footer Navigation">
-          <h6 className="footer-title">Navigation</h6>
+          <h6 className="footer-title text-secondary">Pages</h6>
           {mainNavLinks.map((link) => (
-            <a key={link.path} href={link.path} className="link link-hover">
+            <Link key={link.path} to={link.path} className="link link-hover">
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
 
-      <div className="footer footer-center p-4 border-base-200 copyright">
+      <div className="footer footer-center p-4 border-base-200 text-base-100 bg-secondary">
         © {new Date().getFullYear()} Night Eye Industries Ltd. All rights
         reserved.
       </div>

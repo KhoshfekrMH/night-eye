@@ -7,8 +7,9 @@
 }
 
 .nav-link {
-  color: var(--color-text);
-  transition: color 0.2s ease;
+  transition:
+    color 0.3 ease,
+    border-bottom-color 0.3s ease;
 }
 
 .nav-link:hover {
@@ -18,5 +19,5 @@
 .nav-link.active {
   font-weight: bold;
   color: var(--color-accent-2);
-  border-bottom: 2px solid var(--color-accent-2); /* Optional underline */
+  border-bottom: 2px solid var(--color-accent-2);
 }

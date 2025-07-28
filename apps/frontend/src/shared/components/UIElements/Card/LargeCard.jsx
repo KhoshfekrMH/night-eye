@@ -9,7 +9,7 @@ function LargeCard(props) {
 
   return (
     <div
-      className="card lg:card-side bg-base-100 shadow-sm"
+      className="card lg:card-side bg-base-300 shadow-sm"
       onClick={handleClick}
     >
       <figure>
@@ -20,15 +20,13 @@ function LargeCard(props) {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{props.title}</h2>
-        {props.badge && (
-          <div className="badge badge-secondary">{props.badge}</div>
-        )}
+        <h2 className="card-title text-secondary">{props.title}</h2>
+        {props.badge && <div className="badge badge-error">{props.badge}</div>}
         <p className="card-description">{props.description}</p>
         <div className="card-actions justify-end">
           {props.tags &&
             props.tags.map((tag) => (
-              <div key={tag} className="badge badge-outline">
+              <div key={tag} className="badge badge-primary">
                 {tag}
               </div>
             ))}

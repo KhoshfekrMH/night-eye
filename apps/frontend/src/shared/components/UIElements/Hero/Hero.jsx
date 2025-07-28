@@ -11,7 +11,7 @@ function Hero(props) {
             alt={`Image for: ${props.title}`}
           />
           <div className="p-2">
-            <h1 className="text-5xl font-bold title-text">{props.title}</h1>
+            <h1 className="text-5xl font-bold text-secondary">{props.title}</h1>
             <p className="py-6">{props.description}</p>
             <button className="btn btn-primary">
               <Link to={props.buttonLink}>{props.buttonText}</Link>
