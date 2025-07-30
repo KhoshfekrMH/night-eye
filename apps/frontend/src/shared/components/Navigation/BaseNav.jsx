@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
+import SearchNav from "./SearchNav";
 import "./BaseNav.css";
 
 function BaseNav({ links = [], children }) {
@@ -65,7 +66,11 @@ function BaseNav({ links = [], children }) {
         </ul>
       </div>
 
-      <div className="navbar-end">{children}</div>
+      <div className="navbar-end">
+        {" "}
+        <SearchNav />
+        {children}
+      </div>
     </div>
   );
 }

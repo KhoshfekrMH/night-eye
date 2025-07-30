@@ -11,7 +11,7 @@ function Footer() {
             className="w-24"
             alt="Night Eye Website Logo"
           />
-          <p className="title-text">Night Eye</p>
+          <p className="text-secondary font-bold">Night Eye</p>
           <p>Providing reliable tech, Sci-Fi News since 1992</p>
         </aside>
 

@@ -41,6 +41,10 @@ const routes = [
     element: <Archive type="technology" />,
   },
   {
+    path: "/search/:query",
+    element: <Archive type={"search " + ":query"} />,
+  },
+  {
     path: "/news/:slug",
     element: <NewsItem />,
   },
