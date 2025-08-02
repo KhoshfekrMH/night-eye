@@ -1,14 +1,23 @@
+import LoadingSpinner from "../shared/util/LoadingSpinner";
 import MainLayout from "../Layouts/MainLayout";
 import PanelLayout from "../Layouts/PanelLayout";
 import Hero from "../shared/components/UIElements/Hero/Hero";
 import Card from "../shared/components/UIElements/Card/Card";
 import ScrollTabs from "../shared/components/UIElements/Tab/ScrollTabs";
+import Breadcrumbs from "../shared/components/Navigation/Breadcrumbs";
 
 const tabs = ["tab1", "tab2", "tab3"];
+const links = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
+];
 
 export default function TestPage() {
   return (
     <>
+      <LoadingSpinner />
+      <Breadcrumbs links={links} />
       <PanelLayout></PanelLayout>
       <MainLayout>
         <Hero
