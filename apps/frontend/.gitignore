@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignore local dummy data
-src/shared/dummy.js
+src/shared/dummy.jsx
