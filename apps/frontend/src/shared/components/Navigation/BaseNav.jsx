@@ -13,7 +13,11 @@ function BaseNav({ links = [], children }) {
   return (
     <div className="navbar bg-base-200 shadow-sm">
       <Dropdown links={links} />
-      <img src="./Night Eye Logo.png" className="w-16" alt="Night Eye Logo" />
+      <img
+        src="../../../../public/Night Eye Logo.png"
+        className="w-16"
+        alt="Night Eye Logo"
+      />
 
       <div className="navbar-start">
         <Link className="logo btn btn-ghost text-xl" to="/">

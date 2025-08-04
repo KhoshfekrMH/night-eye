@@ -1,15 +1,15 @@
-function scrolltabs({ tags = [] }) {
+function scrolltabs({ categories = [] }) {
   return (
     <div className="flex justify-center mt-4">
       <div role="tablist" className="tabs tabs-bordered">
-        {tags.map((tag, index) => (
+        {categories.map((category, index) => (
           <a
             key={index}
-            href={`#${tag.toLowerCase()}`}
+            href={`#${category.toLowerCase()}`}
             role="tab"
             className="tab"
           >
-            {tag}
+            {category}
           </a>
         ))}
       </div>

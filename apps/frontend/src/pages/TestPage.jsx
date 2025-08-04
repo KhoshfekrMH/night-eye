@@ -5,7 +5,7 @@ export default function TestPage() {
   return (
     <>
       <MainLayout>
-        <NewsList type="small" tag="Space" />
+        <NewsList size="wrap" category="all" />
       </MainLayout>
     </>
   );
