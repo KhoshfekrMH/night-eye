@@ -27,23 +27,23 @@ const routes = [
   },
   {
     path: "/archive",
-    element: <Archive key="all" category="all" />,
+    element: <Archive category="all" />,
   },
   {
     path: "/archive/space",
-    element: <Archive key="space" category="space" />,
+    element: <Archive category="space" />,
   },
   {
     path: "/archive/nasa",
-    element: <Archive key="nasa" category="nasa" />,
+    element: <Archive category="nasa" />,
   },
   {
     path: "/archive/tech",
-    element: <Archive key="tech" category="tech" />,
+    element: <Archive category="tech" />,
   },
   {
     path: "/search/:query",
-    element: <SearchWrapper key="search" />,
+    element: <SearchWrapper />,
   },
   {
     path: "/news/:slug",

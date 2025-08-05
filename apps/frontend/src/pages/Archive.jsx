@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
 import MainLayout from "../Layouts/MainLayout";
@@ -13,6 +14,10 @@ function Archive({ category, query }) {
     category === "search"
       ? `Search result for "${query}"`
       : `Archive - ${category}`;
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   return (
     <>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import MainLayout from "../../Layouts/MainLayout";
@@ -22,6 +23,10 @@ function NewsItem() {
     { label: item.category, path: `/archive/${item.category}` },
     { label: item.title, path: `/news/${item.slug}` },
   ];
+
+  useEffect(() => {
+    document.title = `${item.title} - Night Eye`;
+  }, [item.title]);
 
   return (
     <MainLayout>

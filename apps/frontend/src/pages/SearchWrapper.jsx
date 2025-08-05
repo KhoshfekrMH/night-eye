@@ -3,7 +3,7 @@ import Archive from "./Archive";
 
 function SearchWrapper() {
   const { query } = useParams();
-  return <Archive key={query} category="search" query={query} />;
+  return <Archive category="search" query={query} />;
 }
 
 export default SearchWrapper;
