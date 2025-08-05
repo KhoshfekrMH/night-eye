@@ -14,9 +14,9 @@ function NotFound() {
         />
       </Helmet>
       <MainLayout>
-        <section className="flex items-center h-full p-16">
-          <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-            <div className="max-w-md text-center">
+        <main className="flex items-center h-full p-16">
+          <section className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+            <article className="max-w-md text-center">
               <h2 className="mb-8 font-extrabold text-9xl text-error">
                 <span className="sr-only">Error</span>404
               </h2>
@@ -33,9 +33,9 @@ function NotFound() {
               >
                 Back to homepage
               </Link>
-            </div>
-          </div>
-        </section>
+            </article>
+          </section>
+        </main>
       </MainLayout>
     </>
   );

@@ -3,6 +3,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import NewsItem from "../news/pages/NewsItem";
 import Archive from "../pages/Archive";
+import SearchWrapper from "../pages/SearchWrapper";
 import Auth from "../dashboard/pages/Auth";
 import Panel from "../dashboard/pages/Panel";
 import NotFound from "../pages/NotFound";
@@ -26,23 +27,23 @@ const routes = [
   },
   {
     path: "/archive",
-    element: <Archive category="all" />,
+    element: <Archive key="all" category="all" />,
   },
   {
     path: "/archive/space",
-    element: <Archive category="space" />,
+    element: <Archive key="space" category="space" />,
   },
   {
     path: "/archive/nasa",
-    element: <Archive category="nasa" />,
+    element: <Archive key="nasa" category="nasa" />,
   },
   {
     path: "/archive/tech",
-    element: <Archive category="technology" />,
+    element: <Archive key="tech" category="tech" />,
   },
   {
     path: "/search/:query",
-    element: <Archive category={"search " + ":query"} />,
+    element: <SearchWrapper key="search" />,
   },
   {
     path: "/news/:slug",
