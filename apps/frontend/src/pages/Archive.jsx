@@ -31,10 +31,10 @@ function Archive({ category, query }) {
               {header}
             </h1>
           </section>
-
           <NewsList
             category={category !== "search" ? category : undefined}
             query={query}
+            pagination
           />
         </main>
       </MainLayout>

@@ -3,6 +3,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import NewsItem from "../news/pages/NewsItem";
 import Archive from "../pages/Archive";
+import ArchiveWrapper from "../pages/ArchiveWrapper";
 import SearchWrapper from "../pages/SearchWrapper";
 import Auth from "../dashboard/pages/Auth";
 import Panel from "../dashboard/pages/Panel";
@@ -40,6 +41,10 @@ const routes = [
   {
     path: "/archive/tech",
     element: <Archive category="tech" />,
+  },
+  {
+    path: "/archive/:category/:page",
+    element: <ArchiveWrapper />,
   },
   {
     path: "/search/:query",
