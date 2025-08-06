@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Calendar } from "lucide-react";
 
 function SmallCard(props) {
   const navigate = useNavigate();
@@ -29,6 +30,11 @@ function SmallCard(props) {
               </div>
             ))}
         </div>
+      </div>
+      <div className="flex flex-row items-center p-2 gap-2 text-primary">
+        <Calendar />
+        <span className="text-sm">{props.date}</span>
+        {props.author}
       </div>
     </div>
   );

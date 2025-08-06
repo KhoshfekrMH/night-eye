@@ -37,6 +37,11 @@ function NewsList({
 
   const newsToRender = pagination ? paginationNews : filteredNews;
 
+  function handlePageChange(page) {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <>
       <div className="flex flex-wrap justify-center gap-4">
@@ -64,10 +69,7 @@ function NewsList({
           <Pagination
             totalPage={totalPage}
             currentPage={currentPage}
-            onPageChange={(page) => {
-              setCurrentPage(page);
-              window.scroll({ top: 0, behavior: "smooth" });
-            }}
+            onPageChange={handlePageChange}
           />
         )}
       </div>
