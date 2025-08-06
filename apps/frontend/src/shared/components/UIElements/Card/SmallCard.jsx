@@ -22,6 +22,10 @@ function SmallCard(props) {
 
         {props.badge && <div className="badge badge-error">{props.badge}</div>}
         <p className="card-description">{props.description.slice(0, 100)}...</p>
+        <div className="flex flex-row items-center p-2 gap-2 text-primary">
+          <Calendar />
+          <span className="text-sm">{props.date}</span>
+        </div>
         <div className="card-actions justify-end">
           {props.tags &&
             props.tags.map((tag) => (
@@ -30,11 +34,6 @@ function SmallCard(props) {
               </div>
             ))}
         </div>
-      </div>
-      <div className="flex flex-row items-center p-2 gap-2 text-primary">
-        <Calendar />
-        <span className="text-sm">{props.date}</span>
-        {props.author}
       </div>
     </div>
   );

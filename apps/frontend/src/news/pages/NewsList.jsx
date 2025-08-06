@@ -14,17 +14,20 @@ function NewsList({
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredNews = useMemo(() => {
+    let filtered;
     if (query) {
-      return news.filter(
+      filtered = news.filter(
         (item) =>
           item.title.toLowerCase().includes(query.toLowerCase()) ||
           item.description.toLowerCase().includes(query.toLowerCase()),
       );
     } else {
-      return category === "all"
-        ? news
-        : news.filter((item) => item.category.includes(category));
+      filtered =
+        category === "all"
+          ? news
+          : news.filter((item) => item.category.includes(category));
     }
+    return filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [category, query]);
 
   const totalPage = Math.ceil(filteredNews.length / PAGE_SIZE);

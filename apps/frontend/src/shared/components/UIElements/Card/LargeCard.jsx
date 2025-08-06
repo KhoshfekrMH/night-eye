@@ -24,6 +24,10 @@ function LargeCard(props) {
         <h2 className="card-title text-secondary">{props.title}</h2>
         {props.badge && <div className="badge badge-error">{props.badge}</div>}
         <p className="card-description">{props.description}</p>
+        <div className="flex flex-row p-2 items-center gap-2 text-primary">
+          <Calendar />
+          <span className="text-sm">{props.date}</span>
+        </div>
         <div className="card-actions justify-end">
           {props.tags &&
             props.tags.map((tag) => (
@@ -32,10 +36,6 @@ function LargeCard(props) {
               </div>
             ))}
         </div>
-      </div>
-      <div className="flex flex-row p-2 items-center gap-2 text-primary">
-        <Calendar />
-        <span className="text-sm">{props.date}</span>
       </div>
     </div>
   );
