@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
+import Tag from "../Tag";
 
 function SmallCard(props) {
   const navigate = useNavigate();
@@ -27,12 +28,7 @@ function SmallCard(props) {
           <span className="text-sm">{props.date}</span>
         </div>
         <div className="card-actions justify-end">
-          {props.tags &&
-            props.tags.map((tag) => (
-              <div key={tag} className="badge badge-primary">
-                {tag}
-              </div>
-            ))}
+          <Tag tags={props.tags} />
         </div>
       </div>
     </div>
