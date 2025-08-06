@@ -7,6 +7,7 @@ import NotFound from "../../pages/NotFound";
 import AuthorCard from "../components/AuthorCard";
 import MetaInfo from "../components/MetaInfo";
 import Tag from "../../shared/components/UIElements/Tag";
+import RelatedNews from "../components/RelatedNews";
 import { news, users } from "../../shared/dummy"; //TODO: Replace with backend call later
 
 function NewsItem() {
@@ -35,7 +36,6 @@ function NewsItem() {
       <Helmet>
         <title>{item.title} - Night Eye</title>
       </Helmet>
-
       <div className="mx-2 py-2">
         <Breadcrumb links={links} />
       </div>
@@ -62,6 +62,12 @@ function NewsItem() {
         </article>
 
         <AuthorCard {...author} />
+
+        <RelatedNews
+          currentSlug={slug}
+          tags={item.tags}
+          category={item.category}
+        />
       </main>
     </MainLayout>
   );
