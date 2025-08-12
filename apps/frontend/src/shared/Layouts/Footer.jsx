@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer sm:footer-horizontal p-10">
         <aside>
           <img
-            src="../../../public/Night Eye Logo.png"
+            src="/Night Eye Logo.png"
             className="w-24"
             alt="Night Eye Website Logo"
           />

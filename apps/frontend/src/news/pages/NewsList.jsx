@@ -1,54 +1,38 @@
-import { useState, useMemo } from "react";
-import { news } from "../../shared/dummy"; //TODO: dummy
+import { useState } from "react";
 import Card from "../../shared/components/UIElements/Card/Card";
-import Pagination from "../components/Pagination";
-
-const PAGE_SIZE = 3; //TODO: move to .env
+import useNewsFilter from "../../shared/hooks/useNewsFilter";
+import NewsPagination from "../components/NewsPagination";
+import { news } from "../../shared/dummy";
 
 function NewsList({
   size = "large",
   category = "all",
   query,
   pagination = false,
+  newsType,
+  ...props
 }) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [paginatedNews, setPaginatedNews] = useState([]);
+  const filteredNews = useNewsFilter(news, category, query);
 
-  const filteredNews = useMemo(() => {
-    let filtered;
-    if (query) {
-      filtered = news.filter(
-        (item) =>
-          item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.description.toLowerCase().includes(query.toLowerCase()),
-      );
+  function finalNewsList() {
+    if (newsType === "badged") {
+      return filteredNews.filter((item) => item.badge);
+    } else if (newsType === "normal") {
+      return filteredNews.filter((item) => !item.badge);
     } else {
-      filtered =
-        category === "all"
-          ? news
-          : news.filter((item) => item.category.includes(category));
+      return filteredNews;
     }
-    return filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [category, query]);
-
-  const totalPage = Math.ceil(filteredNews.length / PAGE_SIZE);
-
-  const paginationNews = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const end = start + PAGE_SIZE;
-    return filteredNews.slice(start, end);
-  }, [filteredNews, currentPage]);
-
-  const newsToRender = pagination ? paginationNews : filteredNews;
-
-  function handlePageChange(page) {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  const finalNews = finalNewsList();
 
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-4">
-        {newsToRender.map((item) => (
+      <div
+        className={`${props.flexStyle || "flex flex-wrap"} justify-center gap-5`}
+      >
+        {(pagination ? paginatedNews : finalNews).map((item) => (
           <Card
             key={item.id}
             type={size === "wrap" ? "card-small" : "card-large"}
@@ -57,25 +41,18 @@ function NewsList({
             {...item}
           />
         ))}
-        {newsToRender.length === 0 && (
-          <p
-            className="text-warning text-center m-10
-            "
-          >
-            {query
-              ? `No news found for "${query}"`
-              : `No news found for "${category}"`}
-          </p>
-        )}
-
-        {pagination && (
-          <Pagination
-            totalPage={totalPage}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        )}
       </div>
+      {(pagination ? paginatedNews : finalNews).length === 0 && (
+        <p className="text-warning text-center m-10">
+          {query
+            ? `No news found for "${query}"`
+            : `No news found for "${category}"`}
+        </p>
+      )}
+
+      {pagination && (
+        <NewsPagination news={filteredNews} onPageChange={setPaginatedNews} />
+      )}
     </>
   );
 }
