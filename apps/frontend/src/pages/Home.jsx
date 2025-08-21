@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+//TODO: Need loading spinner and Skeleton
 import { Link } from "react-router-dom";
 import MainLayout from "../Layouts/MainLayout";
 import Hero from "../shared/components/UIElements/Hero/Hero";
@@ -46,7 +46,7 @@ function Home() {
               className="max-w-4xl"
             >
               <header className="flex flex-row items-center justify-between">
-                <h2 className="text-4xl text-secondary font-bold Capitalize">
+                <h2 className="text-4xl text-secondary font-bold Capitalize hover:underline">
                   <Link to={`/archive/${categories}`}>
                     {categories === "nasa"
                       ? "🚀 Nasa"
