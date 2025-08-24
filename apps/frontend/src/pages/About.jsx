@@ -10,7 +10,7 @@ function About() {
       </Helmet>
       <MainLayout>
         <Hero
-          image="/public/Night Eye.png"
+          image="/Night Eye.png"
           title="About Us"
           description={
             <>
