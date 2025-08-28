@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PhoneCall, Mail } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import MainLayout from "../Layouts/MainLayout";
@@ -6,10 +6,12 @@ import Alert from "../shared/components/UIElements/Alert";
 import { useAlert } from "../shared/context/AlertContext";
 import { sendEmailApi } from "../../service/email";
 import LoadingSpinner from "../shared/util/LoadingSpinner";
+import Captcha from "../shared/util/Captcha";
 
 function Contact() {
   const { showAlert, alert } = useAlert();
   const [loading, setLoading] = useState(false);
+  const [captchaValid, setCaptchaValid] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,12 +26,19 @@ function Contact() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (!captchaValid) {
+      showAlert("Please complete the captcha before submitting", "error");
+      return;
+    }
+
     setLoading(true);
 
     try {
       await sendEmailApi(formData.email, formData.subject, formData.message);
       showAlert("Email sent successfully!", "success");
       setFormData({ email: "", subject: "", message: "" });
+      setCaptchaValid(false);
     } catch (err) {
       showAlert("Failed to send message, please try again", "error");
       console.error(err); //TODO: remove console.log
@@ -107,6 +116,9 @@ function Contact() {
                       className="textarea validator"
                     />
                     <div className="validator-hint">Enter message</div>
+                    <div className="mt-4">
+                      <Captcha onValidate={setCaptchaValid} />
+                    </div>
                     <button className="btn btn-neutral mt-4" type="submit">
                       {loading ? <LoadingSpinner small /> : "Send"}
                     </button>
