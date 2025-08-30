@@ -10,7 +10,7 @@ export function AlertProvider({ children }) {
   const [alert, setAlert] = useState(null);
 
   const showAlert = useCallback(
-    (message, type = "success", duration = 1000000) => {
+    (message, type = "success", duration = 4000) => {
       setAlert({ message, type });
       setTimeout(() => setAlert(null), duration);
     },
