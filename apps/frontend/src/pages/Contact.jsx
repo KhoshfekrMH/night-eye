@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { PhoneCall, Mail } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import MainLayout from "../Layouts/MainLayout";
@@ -12,6 +12,7 @@ function Contact() {
   const { showAlert, alert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [captchaValid, setCaptchaValid] = useState(false);
+  const captchaRef = useRef();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -39,6 +40,7 @@ function Contact() {
       showAlert("Email sent successfully!", "success");
       setFormData({ email: "", subject: "", message: "" });
       setCaptchaValid(false);
+      captchaRef.current.resetCaptcha();
     } catch (err) {
       showAlert("Failed to send message, please try again", "error");
       console.error(err); //TODO: remove console.log
@@ -117,7 +119,7 @@ function Contact() {
                     />
                     <div className="validator-hint">Enter message</div>
                     <div className="mt-4">
-                      <Captcha onValidate={setCaptchaValid} />
+                      <Captcha ref={captchaRef} onValidate={setCaptchaValid} />
                     </div>
                     <button className="btn btn-neutral mt-4" type="submit">
                       {loading ? <LoadingSpinner small /> : "Send"}

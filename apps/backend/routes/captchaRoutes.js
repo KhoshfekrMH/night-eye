@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.get("/generate-captcha", (req, res) => {
   const captcha = svgCaptcha.create({
-    size: 6,
+    size: 4,
     noise: 3,
     color: true,
-    background: "#f0f0f0",
+    background: "#565f89",
   });
   req.session.captcha = captcha.text;
 
