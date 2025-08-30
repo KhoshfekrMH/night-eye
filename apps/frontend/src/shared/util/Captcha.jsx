@@ -17,7 +17,7 @@ const Captcha = forwardRef(({ onValidate }, ref) => {
     setCaptchaSvg(response.data);
     setInput("");
     setStatus(null);
-    onValidate(false);
+    onValidate?.(false);
   }
 
   async function verifyCaptcha() {
@@ -35,26 +35,29 @@ const Captcha = forwardRef(({ onValidate }, ref) => {
 
       if (response.data.success) {
         setStatus("success");
-        onValidate(true);
+        onValidate?.(true);
       } else {
         setStatus("error");
-        onValidate(false);
+        onValidate?.(false);
         showAlert("Invalid captcha", "error");
       }
     } catch {
       setStatus("error");
-      onValidate(false);
+      onValidate?.(false);
       showAlert("Captcha verification failed", "error");
     }
   }
 
+  useImperativeHandle(ref, () => ({
+    reset: () => loadCaptcha(),
+    verify: () => verifyCaptcha(),
+    getValue: () => input,
+    getStatus: () => status,
+  }));
+
   useEffect(() => {
     loadCaptcha();
   }, []);
-
-  useImperativeHandle(ref, () => ({
-    resetCaptcha: () => loadCaptcha(),
-  }));
 
   return (
     <div className="flex flex-col gap-2">
@@ -82,8 +85,8 @@ const Captcha = forwardRef(({ onValidate }, ref) => {
             ${status === "error" ? "border-error" : ""}
         `}
         />
-        {status === "success" && <Check className="text-green-500" size={20} />}
-        {status === "error" && <X className="text-red-500" size={20} />}
+        {status === "success" && <Check className="text-success" size={20} />}
+        {status === "error" && <X className="text-error" size={20} />}
       </div>
       <button
         type="button"
