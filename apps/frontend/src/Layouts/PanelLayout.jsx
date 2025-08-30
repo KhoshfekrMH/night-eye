@@ -1,13 +1,14 @@
 import Header from "../shared/Layouts/Header";
 import Footer from "../shared/Layouts/Footer";
+import { AuthProvider } from "../shared/context/AuthProvider";
 
 function PanelLayout({ children }) {
   return (
-    <div>
+    <AuthProvider>
       <Header type="panel" />
       <main>{children}</main>
       <Footer />
-    </div>
+    </AuthProvider>
   );
 }
 

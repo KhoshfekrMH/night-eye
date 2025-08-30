@@ -11,17 +11,32 @@ export function AuthProvider({ children }) {
     const foundUser = users.find((u) => u.name === username);
     if (foundUser) {
       setUser(foundUser);
+      return foundUser;
     }
 
-    return !!foundUser;
+    return null;
   }, []);
 
   const logout = useCallback(() => {
     setUser(null);
   }, []);
 
+  const isLoggedIn = !!user;
+  const role = user?.role ?? null;
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn: !!user, user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        user,
+        role,
+        login,
+        logout,
+        isAdmin: role === "admin" || role === "owner",
+        isOwner: role === "owner",
+        isWriter: role === "writer",
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
