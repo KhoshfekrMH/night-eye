@@ -40,7 +40,7 @@ function Contact() {
       showAlert("Email sent successfully!", "success");
       setFormData({ email: "", subject: "", message: "" });
       setCaptchaValid(false);
-      captchaRef.current.resetCaptcha();
+      captchaRef.current.reset();
     } catch (err) {
       showAlert("Failed to send message, please try again", "error");
       console.error(err); //TODO: remove console.log
