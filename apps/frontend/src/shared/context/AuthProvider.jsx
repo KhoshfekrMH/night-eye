@@ -6,9 +6,12 @@ import { users } from "../dummy"; //TODO: Replace with backend api
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = useCallback((username) => {
+  const login = useCallback((email, password) => {
     //TODO: replace with backend api callback
-    const foundUser = users.find((u) => u.name === username);
+    const foundUser = users.find(
+      (u) => u.email === email && u.password === password,
+    );
+
     if (foundUser) {
       setUser(foundUser);
       return foundUser;
