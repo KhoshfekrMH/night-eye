@@ -7,6 +7,8 @@ import ArchiveWrapper from "../pages/ArchiveWrapper";
 import SearchWrapper from "../pages/SearchWrapper";
 import Auth from "../dashboard/pages/Auth";
 import Panel from "../dashboard/pages/Panel";
+import PanelRedirect from "../shared/util/temp/PanelRedirect"; //TODO: temp element not secure !!!
+import PrivateRoute from "../shared/util/temp/PrivateRoute"; //TODO: temp element not secure !!!
 import NotFound from "../pages/NotFound";
 import TestPage from "../pages/TestPage";
 
@@ -59,8 +61,16 @@ const routes = [
     element: <Auth />,
   },
   {
+    path: "/panel",
+    element: <PanelRedirect />,
+  },
+  {
     path: "/panel/:uid", //TODO: authentication-based routes
-    element: <Panel />,
+    element: (
+      <PrivateRoute>
+        <Panel />
+      </PrivateRoute>
+    ),
   },
   {
     path: "*",

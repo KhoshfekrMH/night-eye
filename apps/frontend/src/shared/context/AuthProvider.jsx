@@ -4,7 +4,11 @@ import { AuthContext } from "./AuthContext";
 import { users } from "../dummy"; //TODO: Replace with backend api
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   const login = useCallback((email, password) => {
     //TODO: replace with backend api callback
@@ -14,6 +18,7 @@ export function AuthProvider({ children }) {
 
     if (foundUser) {
       setUser(foundUser);
+      localStorage.setItem("user", JSON.stringify(foundUser)); //TODO: temp, please add backend and cookies to check loggedIn
       return foundUser;
     }
 
@@ -26,12 +31,14 @@ export function AuthProvider({ children }) {
 
   const isLoggedIn = !!user;
   const role = user?.role ?? null;
+  const id = user?.id ?? null;
 
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         user,
+        id,
         role,
         login,
         logout,
