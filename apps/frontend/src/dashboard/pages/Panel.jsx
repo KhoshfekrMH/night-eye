@@ -1,10 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import PanelLayout from "../../Layouts/PanelLayout";
-
-function Panel() {
-  return <h1>Panel</h1>;
-import { Helmet } from "react-helmet-async";
-import PanelLayout from "../../Layouts/PanelLayout";
 import PanelNewsTable from "../components/NewsTab/PanelNewsTable";
 
 function Panel() {
