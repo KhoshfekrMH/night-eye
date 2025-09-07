@@ -1,0 +1,77 @@
+import { Link } from "react-router-dom";
+import { Eye, SquarePen, Delete } from "lucide-react";
+import { users } from "../../../../shared/dummy";
+import Tags from "../../../../shared/components/UIElements/Tag";
+
+export default function NewsTableRow({ newsItem }) {
+  const writer = users.find((u) => u.id === newsItem.writerId);
+
+  return (
+    <tr>
+      <td>
+        <label>
+          <input type="checkbox" className="checkbox" />
+        </label>
+      </td>
+      <td>{newsItem.date}</td>
+      <td>
+        <span className="badge badge-ghost">{newsItem.category}</span>
+      </td>
+      <td>
+        <div className="flex items-center gap-3">
+          <div className="avatar">
+            <div className="mask mask-squircle h-12 w-12">
+              <img src={newsItem.mainImage} alt={newsItem.title} />
+            </div>
+          </div>
+          <div>
+            <div className="font-bold">{newsItem.title}</div>
+            <div className="text-sm opacity-50">{writer.name}</div>
+            {newsItem.badge && (
+              <div className="badge badge-error mt-1">{newsItem.badge}</div>
+            )}
+          </div>
+        </div>
+      </td>
+      <td>
+        {newsItem.status ? (
+          <span className="badge badge-ghost badge-sm">{newsItem.status}</span>
+        ) : (
+          <span className="badge badge-ghost badge-sm">Unknown</span>
+        )}
+      </td>
+      <td>
+        <Tags tags={newsItem.tags} />
+      </td>
+      <td>{newsItem.readCount}</td>
+      <td>
+        <div className="text-sm opacity-50">
+          {newsItem.description.slice(0, 100) + "..."}
+        </div>
+      </td>
+      <td>
+        <div className="flex flex-col gap-2 items-start">
+          <Link
+            className="btn btn-ghost btn-xs text-secondary"
+            to={`/news/${newsItem.slug}`}
+          >
+            <Eye />
+            View
+          </Link>
+          <button className="btn btn-ghost btn-xs text-accent">
+            {" "}
+            {/*TODO: need function to edit news */}
+            <SquarePen />
+            Edit
+          </button>
+          <button className="btn btn-ghost btn-xs text-error">
+            {" "}
+            {/*TODO: need function to delete news */}
+            <Delete />
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+}
