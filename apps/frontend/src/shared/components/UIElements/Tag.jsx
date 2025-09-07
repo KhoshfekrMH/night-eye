@@ -1,10 +1,10 @@
-function Tags({ tags }) {
+function Tags({ tags, variant = "primary" }) {
   return (
     <>
       {tags.map((tag) => (
-        <div key={tag} className="badge badge-primary">
+        <span key={tag} className={`badge badge-${variant} mr-1 mb-1`}>
           {tag}
-        </div>
+        </span>
       ))}
     </>
   );
