@@ -26,7 +26,9 @@ export default function NewsTableRow({ newsItem }) {
             </div>
           </div>
           <div>
-            <div className="font-bold">{newsItem.title}</div>
+            <div className="font-bold">
+              {newsItem.title} {newsItem.hero && <span>⭐</span>}
+            </div>
             <div className="text-sm opacity-50">{writer.name}</div>
             {newsItem.badge && (
               <div className="badge badge-error mt-1">{newsItem.badge}</div>
