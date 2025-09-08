@@ -1,5 +1,6 @@
+//TODO: need backend for get data from database
 import { Link } from "react-router-dom";
-import { Eye, SquarePen, Delete } from "lucide-react";
+import { Eye, SquarePen, Delete, Archive } from "lucide-react";
 import { users } from "../../../../shared/dummy";
 import Tags from "../../../../shared/components/UIElements/Tag";
 
@@ -69,6 +70,12 @@ export default function NewsTableRow({ newsItem }) {
             {/*TODO: need function to delete news */}
             <Delete />
             Delete
+          </button>
+          <button className="btn btn-ghost btn-xs text-warning">
+            {" "}
+            {/*TODO: need function to archive news */}
+            <Archive />
+            Archive
           </button>
         </div>
       </td>
