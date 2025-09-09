@@ -4,14 +4,19 @@ import { Eye, SquarePen, Delete, Archive } from "lucide-react";
 import { users } from "../../../../shared/dummy";
 import Tags from "../../../../shared/components/UIElements/Tag";
 
-export default function NewsTableRow({ newsItem }) {
+export default function NewsTableRow({ newsItem, isSelected, toggleRow }) {
   const writer = users.find((u) => u.id === newsItem.writerId);
 
   return (
     <tr>
       <td>
         <label>
-          <input type="checkbox" className="checkbox" />
+          <input
+            type="checkbox"
+            className="checkbox"
+            checked={isSelected}
+            onChange={toggleRow}
+          />
         </label>
       </td>
       <td>{newsItem.date}</td>
@@ -50,35 +55,6 @@ export default function NewsTableRow({ newsItem }) {
       <td>
         <div className="text-sm opacity-50">
           {newsItem.description.slice(0, 100) + "..."}
-        </div>
-      </td>
-      <td>
-        <div className="flex flex-col gap-2 items-start">
-          <Link
-            className="btn btn-ghost btn-xs text-secondary"
-            to={`/news/${newsItem.slug}`}
-          >
-            <Eye />
-            View
-          </Link>
-          <button className="btn btn-ghost btn-xs text-accent">
-            {" "}
-            {/*TODO: need function to edit news */}
-            <SquarePen />
-            Edit
-          </button>
-          <button className="btn btn-ghost btn-xs text-error">
-            {" "}
-            {/*TODO: need function to delete news */}
-            <Delete />
-            Delete
-          </button>
-          <button className="btn btn-ghost btn-xs text-warning">
-            {" "}
-            {/*TODO: need function to archive news */}
-            <Archive />
-            Archive
-          </button>
         </div>
       </td>
     </tr>
