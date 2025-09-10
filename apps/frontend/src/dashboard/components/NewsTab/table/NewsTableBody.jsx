@@ -1,8 +1,7 @@
 //TODO: need backend for get data from database
-import { Link } from "react-router-dom";
-import { Eye, SquarePen, Delete, Archive } from "lucide-react";
 import { users } from "../../../../shared/dummy";
 import Tags from "../../../../shared/components/UIElements/Tag";
+import NewsTableActions from "./NewsTableActions";
 
 export default function NewsTableRow({ newsItem, isSelected, toggleRow }) {
   const writer = users.find((u) => u.id === newsItem.writerId);
@@ -56,6 +55,17 @@ export default function NewsTableRow({ newsItem, isSelected, toggleRow }) {
         <div className="text-sm opacity-50">
           {newsItem.description.slice(0, 100) + "..."}
         </div>
+      </td>
+      <td>
+        {/*TODO: need function for each actions*/}
+        <NewsTableActions
+          newsItem={newsItem}
+          actions={["view", "edit", "delete", "archive"]}
+          onEdit={(item) => console.log("Edit: ", item)}
+          onDelete={(item) => console.log("Delete: ", item)}
+          onArchive={(item) => console.log("Archive: ", item)}
+          mode="row"
+        />
       </td>
     </tr>
   );
