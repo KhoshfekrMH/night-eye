@@ -14,12 +14,13 @@ function NewsPagination({ news, onPageChange }) {
   useEffect(() => {
     const start = (currentPage - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
-    onPageChange(news.slice(start, end));
-  }, [currentPage, news, onPageChange]);
+    const newSlice = news.slice(start, end);
 
-  useEffect(() => {
-    onPageChange(news.slice(0, PAGE_SIZE));
-  }, [news, onPageChange]);
+    onPageChange((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(newSlice)) return prev;
+      return newSlice;
+    });
+  }, [currentPage, news, onPageChange]);
 
   function handlePageChange(page) {
     setCurrentPage(page);
