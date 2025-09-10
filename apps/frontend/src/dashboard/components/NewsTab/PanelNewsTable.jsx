@@ -3,7 +3,7 @@ import { AuthContext } from "../../../shared/context/AuthContext";
 import { news } from "../../../shared/dummy"; //TODO: connect backend for panel news filtered
 import NewsTableBody from "./table/layouts/NewsTableBody";
 import NewsTableHeader from "./table/layouts/NewsTableHeader";
-import NewsTableActions from "./table/util/NewsTableActions";
+import NewsTableBulk from "./table/util/NewsTableBulk";
 
 export default function PanelNewsTable() {
   const { id: userId, isAdmin, isOwner, isWriter } = useContext(AuthContext);
@@ -54,26 +54,11 @@ export default function PanelNewsTable() {
 
   return (
     <div className="overflow-x-auto">
-      <div className="flex flex-row mb-5">
-        <label className="label">
-          <span className="label-text font-bold">Bulk Actions: </span>
-        </label>{" "}
-        {/*TODO: add bulk actions*/}
-        <NewsTableActions
-          onDelete={() => console.log("Bulk Delete", selectedIds)}
-          onArchive={() => console.log("Bulk Archive", selectedIds)}
-          actions={["delete", "archive"]}
-          mode="global"
-        />
-        <div className="justify-end ml-auto">
-          <label className="label">
-            <span className="label-text font-bold">
-              {selectedIds.length > 0 && "Selected: " + selectedIds.length}
-            </span>
-          </label>
-        </div>
-      </div>
-
+      <NewsTableBulk
+        selectedIds={selectedIds}
+        onDelete={() => console.log("Bulk Delete", selectedIds)}
+        onArchive={() => console.log("Bulk Archive", selectedIds)}
+      />
       <table className="table w-full">
         <NewsTableHeader
           panelNews={panelNewsFiltered}
