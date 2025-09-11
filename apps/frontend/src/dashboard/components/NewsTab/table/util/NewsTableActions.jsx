@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Eye, SquarePen, Delete, Archive } from "lucide-react";
+import Actions from "../../../../../shared/components/UIElements/Actions";
 
 export default function NewsTableActions({
   newsItem,
@@ -9,51 +10,37 @@ export default function NewsTableActions({
   actions = ["view", "edit", "delete", "archive"],
   mode = "row",
 }) {
-  return (
-    <div
-      className={
-        mode === "row" ? "flex flex-col gap-2 items-start" : "flex gap-2"
-      }
-    >
-      {actions.includes("view") && (
-        <Link
-          className="btn btn-ghost btn-xs text-secondary"
-          to={`/news/${newsItem?.slug ?? "#"}`}
-        >
-          <Eye />
-          View
-        </Link>
-      )}
+  const actionMap = {
+    view: {
+      label: "View",
+      icon: Eye,
+      type: "link",
+      to: `/news/${newsItem?.slug ?? "#"}`,
+      color: "text-secondary",
+    },
+    edit: {
+      label: "Edit",
+      icon: SquarePen,
+      onClick: onEdit,
+      color: "text-info",
+    },
+    delete: {
+      label: "Delete",
+      icon: Delete,
+      onClick: onDelete,
+      color: "text-error",
+    },
+    archive: {
+      label: "Archive",
+      icon: Archive,
+      onClick: onArchive,
+      color: "text-warning",
+    },
+  };
 
-      {actions.includes("edit") && (
-        <button
-          className="btn btn-ghost btn-xs text-accent"
-          onClick={() => onEdit?.(newsItem)}
-        >
-          <SquarePen />
-          Edit
-        </button>
-      )}
+  const actionItems = actions
+    .map((action) => actionMap[action])
+    .filter(Boolean);
 
-      {actions.includes("delete") && (
-        <button
-          className="btn btn-ghost btn-xs text-error"
-          onClick={() => onDelete?.(newsItem)}
-        >
-          <Delete />
-          Delete
-        </button>
-      )}
-
-      {actions.includes("delete") && (
-        <button
-          className="btn btn-ghost btn-xs text-warning"
-          onClick={() => onArchive?.(newsItem)}
-        >
-          <Archive />
-          Archive
-        </button>
-      )}
-    </div>
-  );
+  return <Actions item={newsItem} actions={actionItems} mode={mode} />;
 }
