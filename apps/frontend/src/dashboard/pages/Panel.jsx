@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import PanelLayout from "../../Layouts/PanelLayout";
+import PanelGuard from "../components/util/PanelGuard";
 import PanelNewsTable from "../components/NewsTab/PanelNewsTable";
 
 function Panel() {
@@ -7,6 +8,7 @@ function Panel() {
     <>
       <Helmet>
         <title>Panel - Night Eye</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <PanelLayout>
         <div className="tabs tabs-lift mb-4 p-4">
@@ -18,28 +20,30 @@ function Panel() {
             defaultChecked
           />
           <section className="tab-content bg-base-100 border-base-300 p-6">
-            <div className="tabs tabs-border">
-              <input
-                type="radio"
-                name="news_tab"
-                className="tab"
-                aria-label="🗂️ News Table"
-                defaultChecked
-              />
-              <article className="tab-content border-base-300 bg-base-100 p-10">
-                <PanelNewsTable />
-              </article>
+            <PanelGuard>
+              <div className="tabs tabs-border">
+                <input
+                  type="radio"
+                  name="news_tab"
+                  className="tab"
+                  aria-label="🗂️ News Table"
+                  defaultChecked
+                />
+                <article className="tab-content border-base-300 bg-base-100 p-10">
+                  <PanelNewsTable />
+                </article>
 
-              <input
-                type="radio"
-                name="news_tab"
-                className="tab"
-                aria-label="✏️ Create News"
-              />
-              <article className="tab-content border-base-300 bg-base-100 p-10">
-                Create News
-              </article>
-            </div>
+                <input
+                  type="radio"
+                  name="news_tab"
+                  className="tab"
+                  aria-label="✏️ Create News"
+                />
+                <article className="tab-content border-base-300 bg-base-100 p-10">
+                  Create News
+                </article>
+              </div>
+            </PanelGuard>
           </section>
 
           <input
