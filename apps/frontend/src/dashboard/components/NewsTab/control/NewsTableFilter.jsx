@@ -1,11 +1,9 @@
 export default function NewsTableFilter({ filters, setFilters }) {
   return (
-    <fieldset className="fieldset space-y-3 flex flex-row">
+    <fieldset className="fieldset space-y-7 flex flex-row w-1/2">
       <legend className="fieldset-legend font-bold">Filter</legend>
 
-      <label className="label" for="category">
-        Category:
-      </label>
+      <label className="label">Category:</label>
       <select
         name="category"
         value={filters.category}
@@ -20,9 +18,7 @@ export default function NewsTableFilter({ filters, setFilters }) {
         <option value="tech">tech</option>
       </select>
 
-      <label className="label" for="status">
-        Status:
-      </label>
+      <label className="label">Status:</label>
       <select
         name="status"
         value={filters.status}
