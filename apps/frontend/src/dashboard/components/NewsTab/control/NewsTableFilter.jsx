@@ -1,10 +1,10 @@
 export default function NewsTableFilter({ filters, setFilters }) {
   return (
-    <fieldset className="fieldset space-y-3">
+    <fieldset className="fieldset space-y-3 flex flex-row">
       <legend className="fieldset-legend font-bold">Filter</legend>
 
       <label className="label" for="category">
-        Category
+        Category:
       </label>
       <select
         name="category"
@@ -21,7 +21,7 @@ export default function NewsTableFilter({ filters, setFilters }) {
       </select>
 
       <label className="label" for="status">
-        Status
+        Status:
       </label>
       <select
         name="status"

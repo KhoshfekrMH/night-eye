@@ -4,6 +4,7 @@ import { news } from "../../../shared/dummy"; //TODO: connect backend for panel 
 import NewsTableBody from "./table/layouts/NewsTableBody";
 import NewsTableHeader from "./table/layouts/NewsTableHeader";
 import NewsTableBulk from "./table/util/NewsTableBulk";
+import NewsTableControl from "./control/NewsTableControl";
 
 export default function PanelNewsTable() {
   const { id: userId, isAdmin, isOwner, isWriter } = useContext(AuthContext);
@@ -11,6 +12,13 @@ export default function PanelNewsTable() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [dateSort, setDateSort] = useState("desc");
   const [readCountSort, setReadCountSort] = useState(null);
+  const [filters, setFilters] = useState({
+    category: "",
+    status: "",
+    badged: false,
+    hero: false,
+  });
+  const [searchQuery, setSearchQuery] = useState("");
 
   let panelNewsFiltered = news.filter((n) => {
     if (isOwner || isAdmin) {
@@ -21,6 +29,21 @@ export default function PanelNewsTable() {
       return false;
     }
   });
+
+  panelNewsFiltered = panelNewsFiltered.filter((n) => {
+    if (filters.category && !n.category.includes(filters.category))
+      return false;
+    if (filters.status && !n.status.includes(filters.status)) return false;
+    if (filters.badged && !n.badge) return false;
+    if (filters.hero && !n.hero) return false;
+    return true;
+  });
+
+  if (searchQuery) {
+    panelNewsFiltered = panelNewsFiltered.filter((n) =>
+      n.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  }
 
   if (dateSort) {
     panelNewsFiltered = [...panelNewsFiltered].sort((a, b) =>
@@ -54,11 +77,18 @@ export default function PanelNewsTable() {
 
   return (
     <div className="overflow-x-auto">
+      <NewsTableControl
+        onSeach={setSearchQuery}
+        filter={filters}
+        setFilters={setFilters}
+      />
+
       <NewsTableBulk
         selectedIds={selectedIds}
         onDelete={() => console.log("Bulk Delete", selectedIds)}
         onArchive={() => console.log("Bulk Archive", selectedIds)}
       />
+
       <table className="table w-full">
         <NewsTableHeader
           panelNews={panelNewsFiltered}
