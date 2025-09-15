@@ -17,6 +17,7 @@ export default function PanelNewsTable() {
     status: "",
     badged: false,
     hero: false,
+    writer: "",
   });
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -36,6 +37,7 @@ export default function PanelNewsTable() {
     if (filters.status && !n.status.includes(filters.status)) return false;
     if (filters.badged && !n.badge) return false;
     if (filters.hero && !n.hero) return false;
+    if (filters.writer && !n.writerId.includes(filters.writer)) return false;
     return true;
   });
 
