@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Alert from "../../../shared/components/UIElements/Alert";
+import { AuthContext } from "../../../shared/context/AuthContext";
 
-export default function PanelGuard({ children }) {
+export default function PanelGuard({ children, roles = [] }) {
   const [isMobile, setIsMobile] = useState(false);
+  const { isLoggedIn, role } = useContext(AuthContext);
 
   useEffect(() => {
     function check() {
@@ -18,6 +20,19 @@ export default function PanelGuard({ children }) {
   if (isMobile) {
     return (
       <Alert type="warning" message="Panel is not available on mobile view!" />
+    );
+  }
+
+  if (!isLoggedIn) {
+    return <Alert type="error" message="Access Denied! Please login!" />;
+  }
+
+  if (roles.length > 0 && !roles.includes(role)) {
+    return (
+      <Alert
+        type="warning"
+        message="You do not have permission to view this section"
+      />
     );
   }
 
