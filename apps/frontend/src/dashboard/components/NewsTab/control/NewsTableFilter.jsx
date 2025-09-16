@@ -1,4 +1,4 @@
-import { users } from "../../../../shared/dummy";
+import { users } from "../../../../shared/dummy"; //TODO: need backend for get data from DB
 export default function NewsTableFilter({ filters, setFilters }) {
   return (
     <fieldset className="fieldset space-y-7 flex flex-row w-190">
