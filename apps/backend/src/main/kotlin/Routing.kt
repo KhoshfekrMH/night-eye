@@ -8,8 +8,8 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
   routing {
-    get("/") {
-      call.respondText("Hello World")
+    get("/api") {
+      call.respondText("Backend is running!")
     }
     contactRoute()
   }

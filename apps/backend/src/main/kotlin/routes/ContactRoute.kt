@@ -25,27 +25,26 @@ fun Route.contactRoute() {
     inboxId = 4226251L
   )
 
-  post("/contact") {
+  post("/api/email/send-email") {
     val rawJson = call.receiveText()
     val request = kotlinx.serialization.json.Json.decodeFromString<ContactRequest>(rawJson)
 
-    val subject = "New contact message from ${request.name}"
     val text = """
-        Name: ${request.name}
+        Subject: ${request.subject}
         Email: ${request.email}
         Message: ${request.message}
     """.trimIndent()
 
     val ok = mailService.sendEmail(
       to = "${Dotenv.load().get("ADMIN_EMAIL")}", //TODO: must connected to db to get owner email
-      subject = subject,
+      subject = request.subject,
       text = text
     )
 
     if (ok) {
-      call.respond(HttpStatusCode.OK, "Email sent!")
+      call.respond(HttpStatusCode.OK, mapOf("message" to "Email sent!"))
     } else {
-      call.respond(HttpStatusCode.InternalServerError, "Error sending email.")
+      call.respond(HttpStatusCode.InternalServerError, mapOf("error" to "Error sending email."))
     }
   }
 }
