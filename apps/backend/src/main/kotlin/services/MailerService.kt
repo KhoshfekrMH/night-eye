@@ -1,39 +1,23 @@
 package services
 
-import io.mailtrap.client.MailtrapClient
-import io.mailtrap.config.MailtrapConfig
-import io.mailtrap.factory.MailtrapClientFactory
-import io.mailtrap.model.request.emails.Address
-import io.mailtrap.model.request.emails.MailtrapMail
+import at.quickme.kotlinmailer.delivery.*
+import at.quickme.kotlinmailer.email.*
 
-class MailService(
-  token: String,
-  inboxId: Long,
-  sandbox: Boolean = true
+//WARN: I used MailHog to send emails!
+
+class MailerService(
+  host: String,
+  port: Int
 ) {
-  private val client: MailtrapClient
-
-  init {
-    val config = MailtrapConfig.Builder()
-      .sandbox(sandbox)
-      .inboxId(inboxId)
-      .token(token)
-      .build()
-
-    client = MailtrapClientFactory.createMailtrapClient(config)
-  }
-
-  fun sendEmail(to: String, subject: String, text: String): Boolean {
-    val mail = MailtrapMail.builder()
-      .from(Address("test@example.com", "Night Eye"))
-      .to(listOf(Address(to.lowercase())))
-      .subject(subject)
-      .text(text)
-      .category("Night Eye Email")
-      .build()
-
+  private val mailer = mailerBuilder(host = host, port = port)
+  suspend fun sendEmail(to: String, subject: String, text: String, from: String): Boolean {
     return try {
-      client.send(mail)
+      emailBuilder {
+        from(from)
+        to(to)
+        withSubject(subject)
+        withPlainText(text)
+      }.send(mailer)
       true
     } catch (e: Exception) {
       e.printStackTrace()

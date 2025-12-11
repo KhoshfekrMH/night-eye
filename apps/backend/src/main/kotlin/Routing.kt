@@ -11,6 +11,7 @@ fun Application.configureRouting() {
     get("/api") {
       call.respondText("Backend is running!")
     }
+
     contactRoute()
   }
 }

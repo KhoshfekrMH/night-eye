@@ -21,10 +21,14 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
 
     implementation(libs.dotenv.java)
-    implementation(libs.mailtrap.sdk)
 
     implementation("io.ktor:ktor-server-content-negotiation:3.3.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
 
     implementation("io.ktor:ktor-server-cors:3.3.2")
+
+    implementation("io.ktor:ktor-server-rate-limit:3.3.2")
+    implementation("io.ktor:ktor-server-status-pages:3.3.2")
+
+    implementation("at.quickme.kotlinmailer:core:1.1.20")
 }

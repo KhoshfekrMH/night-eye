@@ -17,6 +17,7 @@ function Contact() {
     email: "",
     subject: "",
     message: "",
+    nickname: "",
   });
 
   function handleChange(event) {
@@ -30,9 +31,14 @@ function Contact() {
     setLoading(true);
 
     try {
-      await sendEmailApi(formData.email, formData.subject, formData.message);
+      await sendEmailApi(
+        formData.email,
+        formData.subject,
+        formData.message,
+        formData.nickname,
+      );
       showAlert("Email sent successfully!", "success");
-      setFormData({ email: "", subject: "", message: "" });
+      setFormData({ email: "", subject: "", message: "", nickname: "" });
     } catch (err) {
       showAlert("Failed to send message, please try again", "error");
       console.error(err); //TODO: remove console.log
@@ -110,6 +116,14 @@ function Contact() {
                       className="textarea validator"
                     />
                     <div className="validator-hint">Enter message</div>
+                    <input
+                      type="text"
+                      name="nickname"
+                      value={formData.nickname}
+                      onChange={handleChange}
+                      tabIndex="-1"
+                      autoComplete="off"
+                    />
                     <button className="btn btn-neutral mt-4" type="submit">
                       {loading ? <LoadingSpinner small /> : "Send"}
                     </button>
