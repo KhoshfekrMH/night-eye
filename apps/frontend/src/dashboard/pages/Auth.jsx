@@ -1,11 +1,10 @@
 //TODO: obscure auth system, need backend!
-import { useState, useRef, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import MainLayout from "../../Layouts/MainLayout";
 import Alert from "../../shared/components/UIElements/Alert";
 import { useAlert } from "../../shared/context/AlertContext";
-import Captcha from "../../shared/util/Captcha";
 import { AuthContext } from "../../shared/context/AuthContext";
 import { SettingsContext } from "../../shared/context/SettingsContext";
 
@@ -13,23 +12,12 @@ function Auth() {
   const { showAlert, alert } = useAlert();
   const { siteTitle } = useContext(SettingsContext);
   const { login } = useContext(AuthContext);
-  const captchaRef = useRef();
-  const [captchaValid, setCaptchaValid] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (!captchaValid) {
-      return showAlert(
-        "Please complete the captcha before submitting",
-        "error",
-      );
-    }
-
-    const user = login(email, password);
 
     if (user) {
       console.log("Login Successful", user);
@@ -72,10 +60,6 @@ function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-
-              <div className="mt-4">
-                <Captcha onValidate={setCaptchaValid} ref={captchaRef} />
-              </div>
 
               <button className="btn btn-neutral mt-4" type="submit">
                 Login
