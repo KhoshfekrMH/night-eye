@@ -40,10 +40,11 @@ fun Route.contactRoute() {
             """.trimIndent()
 
       val ok = mailerService.sendEmail(
-        from = request.email,
+        from = "no-reply@yourdomain.com", //WARN: it is internal email
         to = adminEmail,
         subject = request.subject,
-        text = text
+        text = text,
+        replyTo = request.email
       )
 
       if (ok) {
