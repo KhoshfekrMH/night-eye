@@ -119,10 +119,17 @@ function Contact() {
                     <input
                       type="text"
                       name="nickname"
+                      style={{
+                        display: "none !important",
+                        pointerEvents: "none",
+                      }}
                       value={formData.nickname}
                       onChange={handleChange}
                       tabIndex="-1"
                       autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
                     />
                     <button className="btn btn-neutral mt-4" type="submit">
                       {loading ? <LoadingSpinner small /> : "Send"}
