@@ -1,6 +1,6 @@
 package models
 
-import org.jetbrains.exposed.v1.core.*
+import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.datetime.*
 
 object Users : Table("users") {
@@ -11,7 +11,9 @@ object Users : Table("users") {
   val email = varchar("email", 100)
   val avatar = varchar("avatar", 255)
   val createdAt = datetime("created_at")
+    .defaultExpression(CurrentDateTime)
   val updatedAt = datetime("updated_at")
+    .defaultExpression(CurrentDateTime)
 
   override val primaryKey = PrimaryKey(id, name = "PK_User_ID")
 }

@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.h2)
     implementation(libs.exposed.kotlin.datetime)
     implementation(libs.dotenv.java)
+    implementation(libs.postgresql)
 
     implementation("io.ktor:ktor-server-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
@@ -32,4 +33,5 @@ dependencies {
     implementation("io.ktor:ktor-server-rate-limit")
     implementation("io.ktor:ktor-server-status-pages")
     implementation("at.quickme.kotlinmailer:core:1.1.20")
+    implementation("at.favre.lib:bcrypt:0.10.2")
 }

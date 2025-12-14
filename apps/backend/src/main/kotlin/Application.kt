@@ -1,5 +1,6 @@
 package come
 
+import come.initDatabase
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
@@ -17,6 +18,9 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+
+  initDatabase()
+
   install(CORS) {
     allowHost("localhost:5173") //vite local poer
     allowHeader(HttpHeaders.ContentType)
