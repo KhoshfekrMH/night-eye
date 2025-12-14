@@ -20,15 +20,16 @@ dependencies {
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.h2)
+    implementation(libs.exposed.kotlin.datetime)
     implementation(libs.dotenv.java)
 
-    implementation("io.ktor:ktor-server-content-negotiation:3.3.2")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
-
-    implementation("io.ktor:ktor-server-cors:3.3.2")
-
-    implementation("io.ktor:ktor-server-rate-limit:3.3.2")
-    implementation("io.ktor:ktor-server-status-pages:3.3.2")
-
+    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation("io.ktor:ktor-serialization-kotlinx-json")
+    implementation("io.ktor:ktor-server-cors")
+    implementation("io.ktor:ktor-server-rate-limit")
+    implementation("io.ktor:ktor-server-status-pages")
     implementation("at.quickme.kotlinmailer:core:1.1.20")
 }
