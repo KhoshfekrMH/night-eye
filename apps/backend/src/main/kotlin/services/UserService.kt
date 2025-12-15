@@ -25,8 +25,9 @@ object UserService {
     name: String,
     email: String,
     plainPassword: String,
-    avatar: String = ""
   ): User {
+
+    check(UserRepository.findByEmail(email) == null) { "Email already registered" }
 
     val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
 
@@ -36,7 +37,7 @@ object UserService {
       name = name,
       email = email,
       passwordHash = hashPassword(plainPassword),
-      avatar = avatar,
+      avatar = "",
       createdAt = now,
       updatedAt = now
     )
@@ -46,6 +47,8 @@ object UserService {
 
   fun authenticate(email: String, password: String): User? {
     val user = UserRepository.findByEmail(email) ?: return null
-    return if (verifyPassword(password, user.passwordHash)) user else null
+    val verified = BCrypt.verifyer().verify(password.toCharArray(), user.passwordHash).verified
+
+    return if (verified) user else null
   }
 }

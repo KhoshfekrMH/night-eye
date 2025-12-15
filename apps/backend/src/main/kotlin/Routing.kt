@@ -1,11 +1,13 @@
 package come
 
 import routes.contactRoute
+import routes.auth.authRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-
+@kotlin.time.ExperimentalTime
+@kotlin.uuid.ExperimentalUuidApi
 fun Application.configureRouting() {
   routing {
     get("/api") {
@@ -13,5 +15,6 @@ fun Application.configureRouting() {
     }
 
     contactRoute()
+    authRoutes()
   }
 }

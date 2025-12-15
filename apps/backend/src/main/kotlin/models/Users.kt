@@ -4,7 +4,7 @@ import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.datetime.*
 
 object Users : Table("users") {
-  val id = varchar("id", 10)
+  val id = varchar("id", 40)
   val role = varchar("role", 20)
   val name = varchar("name", 50)
   val passwordHash = varchar("password_hash", 255)
