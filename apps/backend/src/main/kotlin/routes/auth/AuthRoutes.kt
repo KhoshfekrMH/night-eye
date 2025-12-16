@@ -16,6 +16,9 @@ import io.ktor.server.auth.jwt.*
 
 import io.github.cdimascio.dotenv.Dotenv
 
+@Serializable
+data class AuthResponse(val accessToken: String, val role: String, val email: String)
+
 @kotlin.time.ExperimentalTime
 @kotlin.uuid.ExperimentalUuidApi
 fun Route.authRoutes() {
@@ -50,12 +53,11 @@ fun Route.authRoutes() {
         ?: return@post call.respond(HttpStatusCode.Unauthorized, "Invalid email or password")
 
       val token = JwtConfig.generateToken(user.email, user.role)
-      call.respond(HttpStatusCode.OK, "token: $token")
+      call.respond(HttpStatusCode.OK, AuthResponse(accessToken = token, role = user.role, email = user.email))
     }
 
     authenticate("auth-jwt") {
       get("/$audience") {
-
         fun JWTPrincipal.requireRole(requered: String): Boolean = payload.getClaim("role").asString() == requered
 
         val principal = call.principal<JWTPrincipal>()!!

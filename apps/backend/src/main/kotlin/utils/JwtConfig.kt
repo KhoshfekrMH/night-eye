@@ -1,15 +1,9 @@
 package utils
 
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.*
-
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.JWTVerifier
-
 import java.util.Date
-
 import io.github.cdimascio.dotenv.Dotenv
 
 object JwtConfig {
@@ -22,11 +16,13 @@ object JwtConfig {
 
   private val algorithm = Algorithm.HMAC256(secret)
 
+  //TODO: make generateAccessToken and generateFreshToken
   fun generateToken(email: String, role: String): String {
     val now = System.currentTimeMillis()
     return JWT.create()
       .withIssuer(issuer)
       .withAudience(audience)
+      .withIssuedAt(Date(now))
       .withClaim("email", email)
       .withClaim("role", role)
       .withExpiresAt(Date(now + expirationMs))
