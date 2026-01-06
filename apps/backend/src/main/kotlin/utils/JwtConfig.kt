@@ -1,10 +1,10 @@
 package utils
 
 import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.JWTVerifier
-import java.util.Date
+import com.auth0.jwt.algorithms.Algorithm
 import io.github.cdimascio.dotenv.Dotenv
+import java.util.Date
 
 object JwtConfig {
   private val dotenv = Dotenv.load()
@@ -16,22 +16,19 @@ object JwtConfig {
 
   private val algorithm = Algorithm.HMAC256(secret)
 
-  //TODO: make generateAccessToken and generateFreshToken
-  fun generateToken(email: String, role: String): String {
+  fun generateAccessToken(userId: String, email: String, role: String): String {
     val now = System.currentTimeMillis()
     return JWT.create()
-      .withIssuer(issuer)
-      .withAudience(audience)
-      .withIssuedAt(Date(now))
-      .withClaim("email", email)
-      .withClaim("role", role)
-      .withExpiresAt(Date(now + expirationMs))
-      .sign(algorithm)
+        .withIssuer(issuer)
+        .withAudience(audience)
+        .withIssuedAt(Date(now))
+        .withClaim("uid", userId)
+        .withClaim("email", email)
+        .withClaim("role", role)
+        .withExpiresAt(Date(now + expirationMs))
+        .sign(algorithm)
   }
 
-  val verifier: JWTVerifier = JWT
-    .require(Algorithm.HMAC256(secret))
-    .withAudience(audience)
-    .withIssuer(issuer)
-    .build()
+  val verifier: JWTVerifier =
+      JWT.require(Algorithm.HMAC256(secret)).withAudience(audience).withIssuer(issuer).build()
 }
