@@ -1,26 +1,20 @@
 package come
 
-import come.initDatabase
-import utils.seedUsers //INFO: used for make default users!
-import utils.JwtConfig
+import io.github.cdimascio.dotenv.Dotenv
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.plugins.statuspages.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import kotlinx.serialization.json.Json
-import io.ktor.server.routing.*
 import io.ktor.server.response.*
-import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.*
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
-import com.auth0.jwt.JWTVerifier
+import io.ktor.server.routing.*
 import kotlin.time.Duration.Companion.seconds
-
-import io.github.cdimascio.dotenv.Dotenv
+import kotlinx.serialization.json.Json
+import utils.JwtConfig
 
 fun main(args: Array<String>) {
   io.ktor.server.netty.EngineMain.main(args)
@@ -35,32 +29,29 @@ fun Application.module() {
   initDatabase()
 
   install(CORS) {
-    allowHost("localhost:5173") //vite local poer
+    allowHost("localhost:5173") // vite local poer
     allowHeader(HttpHeaders.ContentType)
+    allowHeader(HttpHeaders.Authorization)
     allowMethod(HttpMethod.Post)
     allowMethod(HttpMethod.Options)
   }
   install(ContentNegotiation) {
     json(
-      Json {
-        prettyPrint = true
-        ignoreUnknownKeys = true
-        isLenient = true
-      }
-    )
+        Json {
+          prettyPrint = true
+          ignoreUnknownKeys = true
+          isLenient = true
+        })
   }
   install(RateLimit) {
-    register {
-      rateLimiter(limit = 5, refillPeriod = 60.seconds)
-    }
-    register(RateLimitName("protected")) {
-      rateLimiter(limit = 2, refillPeriod = 60.seconds)
-    }
+    register { rateLimiter(limit = 5, refillPeriod = 60.seconds) }
+    register(RateLimitName("protected")) { rateLimiter(limit = 2, refillPeriod = 60.seconds) }
   }
   install(StatusPages) {
     status(HttpStatusCode.TooManyRequests) { call, status ->
       val retryAfter = call.response.headers["Retry-After"]
-      call.respondText(text = "429: Too many requests. Wait for $retryAfter seconds.", status = status)
+      call.respondText(
+          text = "429: Too many requests. Wait for $retryAfter seconds.", status = status)
     }
   }
   install(Authentication) {
