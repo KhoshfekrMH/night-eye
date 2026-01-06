@@ -1,19 +1,20 @@
 package services
 
-import models.User
-import repository.UserRepository
-
+import at.favre.lib.crypto.bcrypt.BCrypt
 import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import at.favre.lib.crypto.bcrypt.BCrypt
-
+import models.User
+import repository.UserRepository
 
 @kotlin.time.ExperimentalTime
 @kotlin.uuid.ExperimentalUuidApi
 object UserService {
-  private fun hashPassword(password: String): String = BCrypt.withDefaults().hashToString(12, password.toCharArray())
+  private val allowRoles = setOf("user", "admin", "writer", "owner")
+
+  private fun hashPassword(password: String): String =
+      BCrypt.withDefaults().hashToString(12, password.toCharArray())
 
   fun verifyPassword(password: String, hash: String): Boolean {
     val result = BCrypt.verifyer().verify(password.toCharArray(), hash)
@@ -21,26 +22,29 @@ object UserService {
   }
 
   fun createUser(
-    role: String,
-    name: String,
-    email: String,
-    plainPassword: String,
+      role: String,
+      name: String,
+      email: String,
+      plainPassword: String,
   ): User {
+    require(role in allowRoles) { "Invalid role" }
 
-    check(UserRepository.findByEmail(email) == null) { "Email already registered" }
+    val normalizedEmail = email.trim().lowercase()
+
+    check(UserRepository.findByEmail(normalizedEmail) == null) { "Email already registered" }
 
     val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
 
-    val user = User(
-      id = Uuid.random().toString(),
-      role = role,
-      name = name,
-      email = email,
-      passwordHash = hashPassword(plainPassword),
-      avatar = "",
-      createdAt = now,
-      updatedAt = now
-    )
+    val user =
+        User(
+            id = Uuid.random().toString(),
+            role = role,
+            name = name.trim(),
+            email = normalizedEmail,
+            passwordHash = hashPassword(plainPassword),
+            avatar = "",
+            createdAt = now,
+            updatedAt = now)
 
     return UserRepository.create(user)
   }
